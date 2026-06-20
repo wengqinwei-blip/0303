@@ -1,0 +1,50 @@
+import java.util.Scanner;
+
+public class CompoundInterestModel {
+
+    // 1. 數學模型 (非線性系統)：複利計算方法
+    // FV = PV * (1 + i)^t，其中 '^t' 使得這是一個非線性系統
+    public static double calculateFutureValue(double presentValue, double interestRate, int timeInYears) {
+        // 使用 Java 的 Math.pow 方法進行乘方運算
+        return presentValue * Math.pow(1 + interestRate, timeInYears);
+    }
+
+    public static void main(String[] args) {
+        // 1. 類別 (class): CompoundInterestModel
+
+        // 2. 主控台輸入 (Console input)
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("----- 複利計算非線性模型 (作業範例) -----");
+        
+        System.out.print("請輸入原始本金 (PV): ");
+        double presentValue = scanner.nextDouble();
+
+        System.out.print("請輸入年利率 (i，例如 5% 輸入 0.05): ");
+        double interestRate = scanner.nextDouble();
+
+        System.out.print("請輸入預計投資年數 (t): ");
+        int timeInYears = scanner.nextInt();
+
+        // 3. 迭代運算 (Iterative computation): 使用迴圈計算每一年的價值
+        System.out.println("\n--- 每一年的價值迭代計算 ---");
+        System.out.println("年份 | 帳戶價值");
+        System.out.println("-----|---------");
+        
+        for (int year = 1; year <= timeInYears; year++) {
+            // 在迴圈中重複計算，模擬迭代過程
+            double valueAtYear = calculateFutureValue(presentValue, interestRate, year);
+            
+            // 4. 主控台輸出 (Console output)
+            System.out.printf("%2d   | $%.2f%n", year, valueAtYear);
+        }
+
+        System.out.println("----------------------------------------");
+        System.out.printf("最終 (第 %d 年) 的未來總價值 (FV) 為: $%.2f%n", timeInYears, 
+                          calculateFutureValue(presentValue, interestRate, timeInYears));
+        System.out.println("----------------------------------------");
+
+        // 關閉輸入流
+        scanner.close();
+    }
+}
